@@ -1,6 +1,19 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+
+  // Custom Hook hecho por los de ReactRouter.
+  // Este Hook retorna una funcion.
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    navigate('/login', {
+      // Este replace lo que hace es que evita que la personal
+      // pueda regresar al historial anterior.
+      replace: true
+    });
+  }
+
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
       <Link className="navbar-brand" to="/">
@@ -34,13 +47,13 @@ export const Navbar = () => {
 
       <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
         <ul className="navbar-nav ml-auto">
-          <NavLink className="nav-item nav-link" to="/login">
-            Logout
-          </NavLink>
           <span className="nav-item nav-link text-primary">
             Brandon
           </span>
-            <button className="nav-item nav-link btn">
+            <button 
+              className="nav-item nav-link btn"
+              onClick={onLogout}
+            >
               Logout
             </button>
         </ul>
