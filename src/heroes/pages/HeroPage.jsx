@@ -16,7 +16,7 @@ export const HeroPage = () => {
   // a la pagina de Marvel.
   if (!hero) {
     return <Navigate to={'/marvel'}/>
-  }s
+  }
 
   return (
     <div className="row mt-5">
