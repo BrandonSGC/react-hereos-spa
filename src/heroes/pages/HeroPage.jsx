@@ -1,13 +1,19 @@
 import { Navigate, useNavigate, useParams } from "react-router-dom"
 import { getHeroById } from "../helpers";
+import { useMemo } from "react";
 
 export const HeroPage = () => {
 
   // Con este Hook podemos obtener los parametros de la url.
   const { id } = useParams();
-  const hero = getHeroById(id);
+
+  // Solo cuando el id cambie va a volver a renderizar esta
+  // funcion y la va a memorizar.
+  const hero = useMemo(() => getHeroById(id), [id]);
+
   const navigate = useNavigate();
 
+  // Para devolverse a la pestaña anterior.
   const onNavigateBack = () => {
     navigate(-1);
   }
