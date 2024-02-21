@@ -1,14 +1,18 @@
-import { useNavigate } from "react-router-dom"
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context";
 
 export const LoginPage = () => {
-
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onLogin = () => {
-    navigate('/marvel', {
-      replace: true
+    const lastPath = localStorage.getItem("lastPath") || "/";
+    login("Brandon Gomez");
+    navigate(lastPath, {
+      replace: true,
     });
-  }
+  };
 
   return (
     <>
@@ -16,13 +20,10 @@ export const LoginPage = () => {
         <h1>Login</h1>
         <hr />
 
-        <button 
-          className="btn btn-primary"
-          onClick={onLogin}
-        >
+        <button className="btn btn-primary" onClick={onLogin}>
           Login
         </button>
       </div>
     </>
-  )
-}
+  );
+};
